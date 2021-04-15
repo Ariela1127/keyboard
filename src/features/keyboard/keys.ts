@@ -7,7 +7,16 @@ enum KeyboardRowIndex {
   Five = 5
 }
 
-const keys = [
+interface Key {
+  id: string;
+  upperText: string;
+  lowerText: string;
+  row: KeyboardRowIndex;
+  widthClass?: string | undefined;
+  colorClass?: string | undefined;
+  hoverColorClass?: string | undefined;
+}
+const keys: Key[] = [
   { id: '1', upperText: '1', lowerText: '1', row: KeyboardRowIndex.One },
   { id: '2', upperText: '2', lowerText: '2', row: KeyboardRowIndex.One },
   { id: '3', upperText: '3', lowerText: '3', row: KeyboardRowIndex.One },

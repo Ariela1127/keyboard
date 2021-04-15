@@ -20,17 +20,21 @@ const KeyboardButton: React.FC<KeyboardButtonProps> = ({
   hoverColorClass,
   widthClass,
   onClick
-}) => (
-  <button
-    className={`text-xl py-3 ${widthClass ?? defaultWidthClass} my-1 mx-1 ${
-      isClicked
-        ? hoverColorClass ?? defaultHoverColorClass
-        : colorClass ?? defaultColorClass
-    } hover:${hoverColorClass ?? defaultHoverColorClass} rounded`}
-    onClick={onClick}
-  >
-    {text}
-  </button>
-);
+}) => {
+  const width = widthClass ?? defaultWidthClass;
+  const color = isClicked
+    ? hoverColorClass ?? defaultHoverColorClass
+    : colorClass ?? defaultColorClass;
+  const hoverColor = hoverColorClass ?? defaultHoverColorClass;
+
+  return (
+    <button
+      className={`text-xl py-3 ${width} my-1 mx-1 ${color} hover:${hoverColor} rounded`}
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
+};
 
 export default KeyboardButton;

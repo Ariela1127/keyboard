@@ -36,16 +36,23 @@ const App: React.FC = () => {
     }
   };
 
+  const flexRowClassName = 'flex flex-row justify-center pb-8';
+
   return (
     <main className='container mx-auto'>
       <div className='flex flex-col flex-nowrap pt-2'>
-        <div className='flex flex-row justify-center pb-8'>
-          <h1 className='text-4xl text-gray-50'>JavaScript Keyboard</h1>
+        <div className={flexRowClassName}>
+          <h1 className='text-4xl text-gray-50'>A Fabulous Keyboard!</h1>
         </div>
-        <div className='flex flex-row justify-center pb-8'>
+        <div className={flexRowClassName}>
           <ReadOnlyTextInput value={inputValue} />
         </div>
-        <Keyboard onKeySelected={handleKeySelected} />
+        <div className='pb-20'>
+          <Keyboard onKeySelected={handleKeySelected} />
+        </div>
+        <div className={flexRowClassName}>
+          <h3 className='text-4xl text-gray-50'>Customise it 🙂</h3>
+        </div>
       </div>
     </main>
   );
