@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Keyboard from './features/keyboard/Keyboard';
+import KeyboardCustomizer from './features/keyboardCustomizer/KeyboardCustomizer';
 import ReadOnlyTextInput from './features/input/ReadOnlyTextInput';
+import { Color } from './features/keyboardCustomizer/colors';
 
 const App: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -38,11 +40,16 @@ const App: React.FC = () => {
 
   const flexRowClassName = 'flex flex-row justify-center pb-8';
 
+  // TODO: move the handleColorChange stuff into a context.
+  const handleColorChange = (color: Color) => {
+    console.log(color);
+  };
+
   return (
     <main className='container mx-auto'>
       <div className='flex flex-col flex-nowrap pt-2'>
         <div className={flexRowClassName}>
-          <h1 className='text-4xl text-gray-50'>A Fabulous Keyboard!</h1>
+          <h1 className='text-4xl'>A Fabulous Keyboard!</h1>
         </div>
         <div className={flexRowClassName}>
           <ReadOnlyTextInput value={inputValue} />
@@ -50,8 +57,9 @@ const App: React.FC = () => {
         <div className='pb-20'>
           <Keyboard onKeySelected={handleKeySelected} />
         </div>
-        <div className={flexRowClassName}>
-          <h3 className='text-4xl text-gray-50'>Customise it 🙂</h3>
+        <div>
+          <h2 className='text-3xl'>Customise it 🙂</h2>
+          <KeyboardCustomizer onColorChange={handleColorChange} />
         </div>
       </div>
     </main>
