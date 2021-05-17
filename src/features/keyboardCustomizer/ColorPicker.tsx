@@ -1,6 +1,6 @@
 import React from 'react';
 import { GithubPicker, ColorResult } from 'react-color';
-import { colors, Color } from './colors';
+import { colors, Color } from '../shared/colors';
 
 interface ColorPickerProps {
   pickedColor: string;
@@ -8,18 +8,9 @@ interface ColorPickerProps {
   onColorChange: (color: Color) => void;
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({
-  pickedColor,
-  pickerColors,
-  onColorChange
-}) => {
-  const handleColorChange = (
-    colorResult: ColorResult,
-    _: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const color = colors.find(
-      color => color.hexCode.toLowerCase() === colorResult.hex.toLowerCase()
-    );
+const ColorPicker: React.FC<ColorPickerProps> = ({ pickedColor, pickerColors, onColorChange }) => {
+  const handleColorChange = (colorResult: ColorResult, _: React.ChangeEvent<HTMLInputElement>) => {
+    const color = colors.find(color => color.hexCode.toLowerCase() === colorResult.hex.toLowerCase());
 
     if (color) {
       onColorChange(color);

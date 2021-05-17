@@ -11,7 +11,14 @@ interface Color {
   area: ColorArea;
 }
 
+const defaultColor: Color = {
+  hexCode: '',
+  tailwindCode: 'bg-green-500',
+  area: ColorArea.Main
+};
+
 const colors: Color[] = [
+  defaultColor,
   {
     hexCode: '#EF4444',
     tailwindCode: 'bg-red-500',
@@ -49,5 +56,5 @@ const colors: Color[] = [
   }
 ];
 
-export { colors, ColorArea };
+export { colors, defaultColor, ColorArea };
 export type { Color };

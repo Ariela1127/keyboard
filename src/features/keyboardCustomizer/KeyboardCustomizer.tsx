@@ -1,26 +1,18 @@
 import React from 'react';
 import ColorPicker from './ColorPicker';
-import { colors, Color, ColorArea } from './colors';
+import { colors, Color, ColorArea } from '../shared/colors';
 
-const mainColors = colors
-  .filter(color => color.area === ColorArea.Main)
-  .map(color => color.hexCode);
+const mainColors = colors.filter(color => color.area === ColorArea.Main).map(color => color.hexCode);
 
 interface KeyboardCustomizerProps {
   onColorChange: (color: Color) => void;
 }
 
-const KeyboardCustomizer: React.FC<KeyboardCustomizerProps> = ({
-  onColorChange
-}) => (
+const KeyboardCustomizer: React.FC<KeyboardCustomizerProps> = ({ onColorChange }) => (
   <>
     <div>
       <h3>Main Color</h3>
-      <ColorPicker
-        pickedColor='#B80000'
-        pickerColors={mainColors}
-        onColorChange={onColorChange}
-      />
+      <ColorPicker pickedColor='#B80000' pickerColors={mainColors} onColorChange={onColorChange} />
     </div>
     <div>
       <h3>Main Color Hover</h3>

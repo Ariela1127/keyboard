@@ -16,6 +16,7 @@ interface Key {
   colorClass?: string | undefined;
   hoverColorClass?: string | undefined;
 }
+
 const keys: Key[] = [
   { id: '1', upperText: '1', lowerText: '1', row: KeyboardRowIndex.One },
   { id: '2', upperText: '2', lowerText: '2', row: KeyboardRowIndex.One },
