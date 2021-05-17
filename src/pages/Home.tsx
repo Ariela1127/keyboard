@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 import Keyboard from '../features/keyboard/Keyboard';
 import KeyboardCustomizer from '../features/keyboardCustomizer/KeyboardCustomizer';
 import ReadOnlyTextInput from '../features/input/ReadOnlyTextInput';
+import useColorContext from '../hooks/useColorContext';
 
 const flexRowClassName = 'flex flex-row justify-center pb-8';
 
 const Home: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
+  const { chosenColor, setChosenColor } = useColorContext();
+
+  // TODO: delete
+  React.useEffect(() => {
+    console.log(chosenColor);
+  }, [chosenColor]);
 
   const handleKeySelected = (key: string) => {
     let newValue = inputValue;
@@ -53,7 +60,7 @@ const Home: React.FC = () => {
         </div>
         <div>
           <h2 className='text-3xl'>Customise it 🙂</h2>
-          <KeyboardCustomizer onColorChange={c => console.log(c)} />
+          <KeyboardCustomizer onColorChange={setChosenColor} />
         </div>
       </div>
     </main>

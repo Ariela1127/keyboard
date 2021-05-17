@@ -12,7 +12,7 @@ interface Color {
 }
 
 const defaultColor: Color = {
-  hexCode: '',
+  hexCode: '#10b981',
   tailwindCode: 'bg-green-500',
   area: ColorArea.Main
 };

@@ -1,33 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Color, defaultColor } from '../features/shared/colors';
 
-interface ColorProviderProps {
-  children: React.ReactNode;
-}
-
 interface ColorContextValue {
-  color: Color;
-  onColorChange: (color: Color) => void;
+  chosenColor: Color;
+  setChosenColor: React.Dispatch<React.SetStateAction<Color>>;
 }
 
 const defaultColorContextValue: ColorContextValue = {
-  color: defaultColor,
-  onColorChange: () => {}
+  chosenColor: defaultColor,
+  setChosenColor: () => {}
 };
 
 const ColorContext = React.createContext<ColorContextValue>(defaultColorContextValue);
 
-const ColorProvider: React.FC<ColorProviderProps> = ({ children }) => {
+const ColorProvider: React.FC = ({ children }) => {
   const [color, setColor] = useState<Color>(defaultColor);
 
-  const handleColorChange = (newColor: Color) => {
-    console.log(newColor);
-    setColor(newColor);
-  };
-
   const contextValue: ColorContextValue = {
-    color: color,
-    onColorChange: handleColorChange
+    chosenColor: color,
+    setChosenColor: setColor
   };
 
   return <ColorContext.Provider value={contextValue}>{children}</ColorContext.Provider>;
