@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# A React Keyboard
+
+This is a personal project that I created to test Tailwind CSS. It is an SPA written in React that displays a simplified keyboard. The `Keyboard` component listens for key events to type the keys you click on your keyboard into a text field. You can also click on the individual buttons to type something into the text field.
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
