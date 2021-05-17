@@ -43,7 +43,10 @@ const Home: React.FC = () => {
     <main className='container mx-auto'>
       <div className='flex flex-col flex-nowrap pt-2'>
         <div className={flexRowClassName}>
-          <h1 className='text-4xl'>A Fabulous Keyboard!</h1>
+          <h1 className='text-4xl'>A React Keyboard</h1>
+        </div>
+        <div className={flexRowClassName}>
+          <p>Try typing something on your keyboard to see something cool!</p>
         </div>
         <div className={flexRowClassName}>
           <ReadOnlyTextInput value={inputValue} />
