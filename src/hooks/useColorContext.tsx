@@ -1,24 +1,45 @@
 import React, { useState, useContext } from 'react';
-import { Color, defaultColor } from '../features/shared/colors';
+import {
+  Color,
+  ColorArea,
+  defaultMainColor,
+  defaultMainHoverColor,
+  defaultHighlightColor,
+  defaultHighlightHoverColor
+} from '../features/shared/colors';
 
-interface ColorContextValue {
-  chosenColor: Color;
-  setChosenColor: React.Dispatch<React.SetStateAction<Color>>;
+interface ChosenColors {
+  [ColorArea.Main]: Color;
+  [ColorArea.MainHover]: Color;
+  [ColorArea.Highlight]: Color;
+  [ColorArea.HighlightHover]: Color;
 }
 
+interface ColorContextValue {
+  chosenColors: ChosenColors;
+  setChosenColors: React.Dispatch<React.SetStateAction<ChosenColors>>;
+}
+
+const defaultChosenColors: ChosenColors = {
+  [ColorArea.Main]: defaultMainColor,
+  [ColorArea.MainHover]: defaultMainHoverColor,
+  [ColorArea.Highlight]: defaultHighlightColor,
+  [ColorArea.HighlightHover]: defaultHighlightHoverColor
+};
+
 const defaultColorContextValue: ColorContextValue = {
-  chosenColor: defaultColor,
-  setChosenColor: () => {}
+  chosenColors: defaultChosenColors,
+  setChosenColors: () => {}
 };
 
 const ColorContext = React.createContext<ColorContextValue>(defaultColorContextValue);
 
 const ColorProvider: React.FC = ({ children }) => {
-  const [color, setColor] = useState<Color>(defaultColor);
+  const [colors, setColors] = useState<ChosenColors>(defaultChosenColors);
 
   const contextValue: ColorContextValue = {
-    chosenColor: color,
-    setChosenColor: setColor
+    chosenColors: colors,
+    setChosenColors: setColors
   };
 
   return <ColorContext.Provider value={contextValue}>{children}</ColorContext.Provider>;

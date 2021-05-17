@@ -3,14 +3,12 @@ import React from 'react';
 interface KeyboardButtonProps {
   text: string;
   isClicked: boolean;
-  colorClass: string | undefined;
-  hoverColorClass: string | undefined;
+  colorClass: string;
+  hoverColorClass: string;
   widthClass: string | undefined;
   onClick: () => void;
 }
 
-const defaultColorClass = 'bg-green-500';
-const defaultHoverColorClass = 'bg-green-700';
 const defaultWidthClass = 'px-5';
 
 const KeyboardButton: React.FC<KeyboardButtonProps> = ({
@@ -22,16 +20,10 @@ const KeyboardButton: React.FC<KeyboardButtonProps> = ({
   onClick
 }) => {
   const width = widthClass ?? defaultWidthClass;
-  const color = isClicked
-    ? hoverColorClass ?? defaultHoverColorClass
-    : colorClass ?? defaultColorClass;
-  const hoverColor = hoverColorClass ?? defaultHoverColorClass;
+  const color = isClicked ? hoverColorClass : colorClass;
 
   return (
-    <button
-      className={`text-xl py-3 ${width} my-1 mx-1 ${color} hover:${hoverColor} rounded`}
-      onClick={onClick}
-    >
+    <button className={`text-xl py-3 ${width} my-1 mx-1 ${color} hover:${hoverColorClass} rounded`} onClick={onClick}>
       {text}
     </button>
   );

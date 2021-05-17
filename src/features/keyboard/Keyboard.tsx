@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import KeyboardRow from './KeyboardRow';
 import KeyboardButton from './KeyboardButton';
-import { keys, KeyboardRowIndex } from './keys';
+import { keys, KeyboardRowIndex, Key } from './keys';
 import useKeyEvent, { EventName } from '../../hooks/useKeyEvent';
+import useColorContext from '../../hooks/useColorContext';
 
 interface KeyboardProps {
   onKeySelected: (key: string) => void;
@@ -11,6 +12,7 @@ interface KeyboardProps {
 const Keyboard: React.FC<KeyboardProps> = ({ onKeySelected }) => {
   const [isCapsLockOn, setIsCapsLockOn] = useState<boolean>(false);
   const [clickedKey, setClickedKey] = useState<string>('');
+  const { chosenColors } = useColorContext();
 
   useKeyEvent(
     EventName.KeyDown,
@@ -31,25 +33,26 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeySelected }) => {
     () => setClickedKey('')
   );
 
+  const mapKeyToButton = (key: Key) => {
+    console.log(key);
+    console.log(chosenColors[key.colorArea].tailwindCode);
+
+    return (
+      <KeyboardButton
+        key={key.id}
+        text={isCapsLockOn ? key.upperText : key.lowerText}
+        widthClass={key?.widthClass}
+        colorClass={chosenColors[key.colorArea].tailwindCode}
+        hoverColorClass={chosenColors[key.hoverColorArea].tailwindCode}
+        isClicked={clickedKey === key.id}
+        onClick={() => onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id)}
+      />
+    );
+  };
+
   return (
     <>
-      <KeyboardRow>
-        {keys
-          .filter(key => key.row === KeyboardRowIndex.One)
-          .map(key => (
-            <KeyboardButton
-              key={key.id}
-              text={isCapsLockOn ? key.upperText : key.lowerText}
-              widthClass={key?.widthClass}
-              colorClass={key?.colorClass}
-              hoverColorClass={key?.hoverColorClass}
-              isClicked={clickedKey === key.id}
-              onClick={() =>
-                onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id)
-              }
-            />
-          ))}
-      </KeyboardRow>
+      <KeyboardRow>{keys.filter(key => key.row === KeyboardRowIndex.One).map(key => mapKeyToButton(key))}</KeyboardRow>
       <KeyboardRow>
         {keys
           .filter(key => key.row === KeyboardRowIndex.Two)
@@ -58,84 +61,21 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeySelected }) => {
               key={key.id}
               text={isCapsLockOn ? key.upperText : key.lowerText}
               widthClass={key?.widthClass}
-              colorClass={key?.colorClass}
-              hoverColorClass={key?.hoverColorClass}
+              colorClass={chosenColors[key.colorArea].tailwindCode}
+              hoverColorClass={chosenColors[key.hoverColorArea].tailwindCode}
               isClicked={clickedKey === key.id}
-              onClick={() =>
-                onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id)
-              }
+              onClick={() => onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id)}
             />
           ))}
       </KeyboardRow>
       <KeyboardRow>
         <>
-          {keys
-            .filter(key => key.row === KeyboardRowIndex.SpecialCase)
-            .map(key => (
-              <KeyboardButton
-                key={key.id}
-                text={isCapsLockOn ? key.upperText : key.lowerText}
-                widthClass={key?.widthClass}
-                colorClass={key?.colorClass}
-                hoverColorClass={key?.hoverColorClass}
-                isClicked={isCapsLockOn}
-                onClick={() => {
-                  setIsCapsLockOn(!isCapsLockOn);
-                  onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id);
-                }}
-              />
-            ))}
-          {keys
-            .filter(key => key.row === KeyboardRowIndex.Three)
-            .map(key => (
-              <KeyboardButton
-                key={key.id}
-                text={isCapsLockOn ? key.upperText : key.lowerText}
-                widthClass={key?.widthClass}
-                colorClass={key?.colorClass}
-                hoverColorClass={key?.hoverColorClass}
-                isClicked={clickedKey === key.id}
-                onClick={() =>
-                  onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id)
-                }
-              />
-            ))}
+          {keys.filter(key => key.row === KeyboardRowIndex.SpecialCase).map(key => mapKeyToButton(key))}
+          {keys.filter(key => key.row === KeyboardRowIndex.Three).map(key => mapKeyToButton(key))}
         </>
       </KeyboardRow>
-      <KeyboardRow>
-        {keys
-          .filter(key => key.row === KeyboardRowIndex.Four)
-          .map(key => (
-            <KeyboardButton
-              key={key.id}
-              text={isCapsLockOn ? key.upperText : key.lowerText}
-              widthClass={key?.widthClass}
-              colorClass={key?.colorClass}
-              hoverColorClass={key?.hoverColorClass}
-              isClicked={clickedKey === key.id}
-              onClick={() =>
-                onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id)
-              }
-            />
-          ))}
-      </KeyboardRow>
-      <KeyboardRow>
-        {keys
-          .filter(key => key.row === KeyboardRowIndex.Five)
-          .map(key => (
-            <KeyboardButton
-              key={key.id}
-              text={isCapsLockOn ? key.upperText : key.lowerText}
-              widthClass={key?.widthClass}
-              colorClass={key?.colorClass}
-              hoverColorClass={key?.hoverColorClass}
-              isClicked={clickedKey === key.id}
-              onClick={() =>
-                onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id)
-              }
-            />
-          ))}
-      </KeyboardRow>
+      <KeyboardRow>{keys.filter(key => key.row === KeyboardRowIndex.Four).map(key => mapKeyToButton(key))}</KeyboardRow>
+      <KeyboardRow>{keys.filter(key => key.row === KeyboardRowIndex.Five).map(key => mapKeyToButton(key))}</KeyboardRow>
     </>
   );
 };
