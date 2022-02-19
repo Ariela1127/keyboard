@@ -276,7 +276,7 @@ const keys: Key[] = [
     lowerText: '↵',
     row: KeyboardRowIndex.Three,
     colorArea: ColorArea.Highlight,
-    hoverColorArea: ColorArea.Highlight,
+    hoverColorArea: ColorArea.HighlightHover,
     widthClass: 'px-10'
   },
   {

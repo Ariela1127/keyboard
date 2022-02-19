@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import KeyboardRow from './KeyboardRow';
-import KeyboardButton from './KeyboardButton';
-import { keys, KeyboardRowIndex, Key } from './keys';
-import useKeyEvent, { EventName } from '../../hooks/useKeyEvent';
 import useColorContext from '../../hooks/useColorContext';
+import useKeyEvent, { EventName } from '../../hooks/useKeyEvent';
+import KeyboardButton from './KeyboardButton';
+import KeyboardRow from './KeyboardRow';
+import { Key, KeyboardRowIndex, keys } from './keys';
 
 interface KeyboardProps {
   onKeySelected: (key: string) => void;
@@ -33,22 +33,17 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeySelected }) => {
     () => setClickedKey('')
   );
 
-  const mapKeyToButton = (key: Key) => {
-    console.log(key);
-    console.log(chosenColors[key.colorArea].tailwindCode);
-
-    return (
-      <KeyboardButton
-        key={key.id}
-        text={isCapsLockOn ? key.upperText : key.lowerText}
-        widthClass={key?.widthClass}
-        colorClass={chosenColors[key.colorArea].tailwindCode}
-        hoverColorClass={chosenColors[key.hoverColorArea].tailwindCode}
-        isClicked={clickedKey === key.id}
-        onClick={() => onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id)}
-      />
-    );
-  };
+  const mapKeyToButton = (key: Key) => (
+    <KeyboardButton
+      key={key.id}
+      text={isCapsLockOn ? key.upperText : key.lowerText}
+      widthClass={key?.widthClass}
+      colorClass={chosenColors[key.colorArea].tailwindCode}
+      hoverColorClass={chosenColors[key.hoverColorArea].tailwindCode}
+      isClicked={clickedKey === key.id}
+      onClick={() => onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id)}
+    />
+  );
 
   return (
     <>
