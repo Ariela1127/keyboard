@@ -1,12 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
   Color,
   ColorArea,
-  defaultMainColor,
-  defaultMainHoverColor,
   defaultHighlightColor,
-  defaultHighlightHoverColor
+  defaultHighlightHoverColor,
+  defaultMainColor,
+  defaultMainHoverColor
 } from '../features/shared/colors';
+import useLocalStorage from './useLocalStorage';
 
 interface ChosenColors {
   [ColorArea.Main]: Color;
@@ -35,7 +36,7 @@ const defaultColorContextValue: ColorContextValue = {
 const ColorContext = React.createContext<ColorContextValue>(defaultColorContextValue);
 
 const ColorProvider: React.FC = ({ children }) => {
-  const [colors, setColors] = useState<ChosenColors>(defaultChosenColors);
+  const [colors, setColors] = useLocalStorage<ChosenColors>('chosenColors', defaultChosenColors);
 
   const contextValue: ColorContextValue = {
     chosenColors: colors,
