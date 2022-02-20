@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import ReadOnlyTextInput from '../features/input/ReadOnlyTextInput';
 import Keyboard from '../features/keyboard/Keyboard';
 import KeyboardCustomizer from '../features/keyboardCustomizer/KeyboardCustomizer';
-import ReadOnlyTextInput from '../features/input/ReadOnlyTextInput';
 
 const flexRowClassName = 'flex flex-row justify-center pb-8';
 
@@ -39,6 +39,8 @@ const Home: React.FC = () => {
     }
   };
 
+  const handleClearButtonClick = () => setInputValue('');
+
   return (
     <main className='container mx-auto'>
       <div className='flex flex-col flex-nowrap pt-2'>
@@ -50,6 +52,9 @@ const Home: React.FC = () => {
         </div>
         <div className={flexRowClassName}>
           <ReadOnlyTextInput value={inputValue} />
+          <button className='text-lg ml-8 px-4 py-0.5 bg-white text-black rounded' onClick={handleClearButtonClick}>
+            Clear
+          </button>
         </div>
         <div className='pb-20'>
           <Keyboard onKeySelected={handleKeySelected} />

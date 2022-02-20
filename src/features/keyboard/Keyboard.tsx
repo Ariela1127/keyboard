@@ -48,21 +48,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeySelected }) => {
   return (
     <>
       <KeyboardRow>{keys.filter(key => key.row === KeyboardRowIndex.One).map(key => mapKeyToButton(key))}</KeyboardRow>
-      <KeyboardRow>
-        {keys
-          .filter(key => key.row === KeyboardRowIndex.Two)
-          .map(key => (
-            <KeyboardButton
-              key={key.id}
-              text={isCapsLockOn ? key.upperText : key.lowerText}
-              widthClass={key?.widthClass}
-              colorClass={chosenColors[key.colorArea].tailwindCode}
-              hoverColorClass={chosenColors[key.hoverColorArea].tailwindCode}
-              isClicked={clickedKey === key.id}
-              onClick={() => onKeySelected(isCapsLockOn ? key.id.toUpperCase() : key.id)}
-            />
-          ))}
-      </KeyboardRow>
+      <KeyboardRow>{keys.filter(key => key.row === KeyboardRowIndex.Two).map(key => mapKeyToButton(key))}</KeyboardRow>
       <KeyboardRow>
         <>
           {keys.filter(key => key.row === KeyboardRowIndex.SpecialCase).map(key => mapKeyToButton(key))}
