@@ -1,7 +1,7 @@
 import React from 'react';
-import ColorPicker from './ColorPicker';
-import { colors, Color, ColorArea } from '../shared/colors';
 import useColorContext from '../../hooks/useColorContext';
+import { Color, ColorArea, colors } from '../shared/colors';
+import ColorPicker from './ColorPicker';
 
 const getColorsByColorArea = (colorArea: ColorArea) =>
   colors.filter(color => color.area === colorArea).map(color => color.hexCode);
@@ -39,7 +39,7 @@ const KeyboardCustomizer: React.FC = () => {
         />
       </div>
       <div>
-        <h3>Highlight Hover</h3>
+        <h3>Highlight Color Hover</h3>
         <ColorPicker
           pickedColor={chosenColors[ColorArea.HighlightHover].hexCode}
           pickerColors={getColorsByColorArea(ColorArea.HighlightHover)}
